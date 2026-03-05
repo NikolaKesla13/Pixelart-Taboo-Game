@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Create New Deck";
+}
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+</head>
+
+<div style="font-family:'VT323'; text-align:center; margin-top:50px;">
+
+    <h1 style="font-size:60px;">CREATE NEW DECK</h1>
+
+    <div style="background-color:white; border:5px solid black; display:inline-block; padding:40px; border-radius:20px;">
+        <form asp-action="Create" method="post">
+
+            <label style="font-size:30px; display:block;">DECK NAME:</label>
+            <input type="text" name="deckName" style="font-size:30px; padding:10px; border:3px solid black; font-family:'VT323'; width:300px;" required />
+
+            <br /><br />
+
+            <button type="submit" class="retro-btn" style="background-color:#4CAF50; color:white;">CREATE</button>
+            <a href="/Decks/Index" class="retro-btn" style="background-color:#ccc; color:black;">CANCEL</a>
+
+        </form>
+    </div>
+
+</div>

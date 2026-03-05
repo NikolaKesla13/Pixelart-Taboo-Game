@@ -1,0 +1,57 @@
+﻿@model PTabuF2.Models.GameSession
+@{
+    ViewData["Title"] = "Settings";
+    // Controller'dan gelen deste listesini alıyoruz
+    var deckList = ViewBag.DeckList as List<PTabuF2.Models.Deck>;
+}
+
+<div class="retro-container">
+    <h1>SETTINGS</h1>
+
+    <form action="/Home/SaveSettings" method="post">
+
+        <label>TEAM 1 NAME</label>
+        <input type="text" name="Team1Name" value="@Model?.Team1Name" required />
+
+        <label>TEAM 2 NAME</label>
+        <input type="text" name="Team2Name" value="@Model?.Team2Name" required />
+
+        <label>TARGET SCORE</label>
+        <input type="number" name="TargetScore" value="@(Model?.TargetScore == 0 ? 15 : Model?.TargetScore)" required />
+
+        <label>TIME (SECONDS)</label>
+        <input type="number" name="RemainingTime" value="@(Model?.RemainingTime == 0 ? 60 : Model?.RemainingTime)" required />
+
+        <label>PASS RIGHTS</label>
+        <input type="number" name="PassRights" value="@(Model?.PassRights == 0 ? 3 : Model?.PassRights)" required />
+
+        <label style="color:#9C59FF;">SELECT DECKS (POOL)</label>
+        <p style="font-size:16px; margin-top:-5px; color:#666;">Hold CTRL (Windows) to select multiple decks.</p>
+
+        <select name="SelectedDeckIDs" multiple style="width:100%; height:150px; padding:10px; font-size:24px; font-family:'VT323'; border:3px solid black; background-color:#f0f0f0;">
+
+            @if (deckList != null)
+            {
+                foreach (var deck in deckList)
+                {
+                    // Eğer daha önce seçilmişse (Model.SelectedDeckIDs listesinde varsa) seçili getir
+                    bool isSelected = Model?.SelectedDeckIDs != null && Model.SelectedDeckIDs.Contains(deck.DeckID);
+
+                    if (isSelected)
+                    {
+                        <option value="@deck.DeckID" selected>@deck.DeckName</option>
+                    }
+                    else
+                    {
+                        <option value="@deck.DeckID">@deck.DeckName</option>
+                    }
+                }
+            }
+        </select>
+        <br /><br />
+
+        <button type="submit" class="retro-btn btn-green" style="width:100%;">SAVE SETTINGS</button>
+        <a href="/Home/Index" class="retro-btn btn-gray" style="width:100%; text-align:center; display:block; margin-top:10px;">BACK</a>
+
+    </form>
+</div>

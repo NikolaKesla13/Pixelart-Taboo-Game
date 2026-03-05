@@ -1,0 +1,26 @@
+﻿@model PTabuF2.Models.GameSession
+@{
+    ViewData["Title"] = "Game Over";
+    string winnerName = "";
+    if (Model.Team1Score >= Model.TargetScore) winnerName = Model.Team1Name;
+    else winnerName = Model.Team2Name;
+}
+
+<div class="retro-container" style="text-align:center; border-color:#FFD700;">
+
+    <h1 style="font-size:100px; color:#FFD700; text-shadow: 5px 5px 0 black;">WINNER!</h1>
+
+    <div style="font-size:60px; margin:30px 0; font-weight:bold;">
+        🏆 @winnerName 🏆
+    </div>
+
+    <div style="font-size:30px; margin-bottom:40px;">
+        FINAL SCORE<br />
+        @Model.Team1Name: @Model.Team1Score - @Model.Team2Name: @Model.Team2Score
+    </div>
+
+    <a href="/Home/Index" class="retro-btn btn-green" style="width:100%;">MAIN MENU</a>
+
+</div>
+
+<audio autoplay src="~/audio/correct.mp3"></audio>

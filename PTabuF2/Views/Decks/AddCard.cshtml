@@ -1,0 +1,81 @@
+﻿@{
+    ViewData["Title"] = "Add New Card";
+}
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <style>
+        .form-container {
+            background-color: white;
+            border: 5px solid black;
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            font-family: 'VT323', monospace;
+        }
+
+        label {
+            font-size: 24px;
+            display: block;
+            margin-top: 15px;
+            color: black;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 20px;
+            border: 3px solid black;
+            font-family: 'VT323';
+            box-sizing: border-box;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #9C59FF;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+
+<div style="font-family:'VT323'; margin-top:30px; padding-bottom:50px;">
+
+    <h1 style="font-size:50px; text-align:center; margin-bottom:20px;">ADD NEW CARD</h1>
+
+    <div class="form-container">
+        <form action="/Decks/SaveCard" method="post">
+
+            <input type="hidden" name="DeckID" value="@ViewBag.DeckID" />
+
+            <label style="color:#FF5E5E;">TARGET WORD</label>
+            <input type="text" name="TargetWord" required autocomplete="off" />
+
+            <label style="color:#9C59FF;">TAG (OPTIONAL)</label>
+            <input type="text" name="Tag" placeholder="e.g. Cinema, Sports..." style="border-color:#9C59FF;" autocomplete="off" />
+
+            <label>FORBIDDEN WORD 1</label>
+            <input type="text" name="ForbiddenWord1" required autocomplete="off" />
+
+            <label>FORBIDDEN WORD 2</label>
+            <input type="text" name="ForbiddenWord2" required autocomplete="off" />
+
+            <label>FORBIDDEN WORD 3</label>
+            <input type="text" name="ForbiddenWord3" required autocomplete="off" />
+
+            <label>FORBIDDEN WORD 4</label>
+            <input type="text" name="ForbiddenWord4" required autocomplete="off" />
+
+            <label>FORBIDDEN WORD 5</label>
+            <input type="text" name="ForbiddenWord5" required autocomplete="off" />
+
+            <br /><br />
+
+            <button type="submit" class="retro-btn" style="background-color:#4CAF50; color:white; width:100%; padding:10px; font-size:24px; border:3px solid black; font-family:'VT323'; cursor:pointer;">SAVE CARD</button>
+
+            <a href="/Decks/Details/@ViewBag.DeckID" style="background-color:#ccc; color:black; display:block; text-align:center; margin-top:10px; padding:10px; font-size:24px; border:3px solid black; font-family:'VT323'; text-decoration:none;">CANCEL</a>
+
+        </form>
+    </div>
+</div>

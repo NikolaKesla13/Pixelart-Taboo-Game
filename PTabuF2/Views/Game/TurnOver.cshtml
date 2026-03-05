@@ -1,0 +1,30 @@
+﻿@model PTabuF2.Models.GameSession
+@{
+    ViewData["Title"] = "Time is Up!";
+}
+
+<div class="retro-container" style="text-align:center;">
+
+    <h1 style="font-size:80px; color:#FF5E5E; margin-bottom:10px;">TIME IS UP!</h1>
+    <h2 style="font-size:40px;">NEXT TEAM, GET READY!</h2>
+
+    <div style="background-color:#eee; border:4px solid black; padding:20px; margin:30px 0;">
+        <h3 style="text-decoration:underline;">CURRENT SCORE</h3>
+        <div style="display:flex; justify-content:space-around; font-size:40px;">
+            <div style="color:#FF5E5E;">
+                @Model.Team1Name: <b>@Model.Team1Score</b>
+            </div>
+            <div style="color:#4CAF50;">
+                @Model.Team2Name: <b>@Model.Team2Score</b>
+            </div>
+        </div>
+        <p style="margin-top:10px; font-size:24px; color:#555;">TARGET: @Model.TargetScore</p>
+    </div>
+
+    <form asp-action="StartRound" method="post">
+        <button type="submit" class="retro-btn btn-yellow" style="width:100%; font-size:40px; padding:20px;" onclick="localStorage.removeItem('gameTime');">
+            START NEXT ROUND
+        </button>
+    </form>
+
+</div>

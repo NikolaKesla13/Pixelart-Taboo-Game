@@ -1,0 +1,108 @@
+﻿@model IEnumerable<PTabuF2.Models.Deck>
+@{
+    ViewData["Title"] = "Manage Decks";
+}
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <style>
+        .retro-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: 'VT323', monospace;
+            font-size: 24px;
+            background-color: white;
+            border: 4px solid black;
+            margin-top: 20px;
+        }
+
+            .retro-table th, .retro-table td {
+                border: 2px solid black;
+                padding: 15px;
+                text-align: left;
+            }
+
+            .retro-table th {
+                background-color: #9C59FF;
+                color: white;
+                font-size: 28px;
+            }
+
+        .action-btn {
+            padding: 5px 15px;
+            text-decoration: none;
+            border: 2px solid black;
+            color: white;
+            font-family: 'VT323';
+            margin-right: 5px;
+            display: inline-block;
+        }
+
+        .btn-details {
+            background-color: #4CAF50;
+        }
+        /* Yeşil */
+        .btn-delete {
+            background-color: #FF5E5E;
+        }
+        /* Kırmızı */
+    </style>
+</head>
+
+<div class="retro-container">
+
+    <h1>DECK MANAGER</h1>
+
+    <div style="text-align:center;">
+        <a href="/Decks/Create" class="retro-btn" style="background-color:#FFD700; color:black; padding:10px 30px; font-size:24px;">+ CREATE NEW DECK</a>
+        <a href="/Home/Index" class="retro-btn" style="background-color:#ccc; color:black; padding:10px 30px; font-size:24px; margin-left:10px;">MAIN MENU</a>
+    </div>
+
+    <table class="retro-table">
+        <thead>
+            <tr>
+                <th>DECK NAME</th>
+                <th>TYPE</th>
+                <th style="width:250px;">ACTIONS</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="font-weight:bold; font-size:28px;">@item.DeckName</td>
+
+                    <td>
+                        @if (item.IsDefault)
+                        {
+                            <span style="background-color:#ccc; color:black; padding:2px 8px; border:1px solid black; font-size:18px;">SYSTEM</span>
+                        }
+                        else
+                        {
+                            <span style="background-color:#FFD700; color:black; padding:2px 8px; border:1px solid black; font-size:18px;">USER</span>
+                        }
+                    </td>
+
+                    <td>
+                        <a href="/Decks/Details/@item.DeckID" class="action-btn btn-details">CARDS</a>
+
+                        @if (!item.IsDefault)
+                        {
+                            <a href="/Decks/Delete/@item.DeckID" class="action-btn btn-delete" onclick="return confirm('Delete this deck and all its cards?');">DELETE</a>
+                        }
+                        else
+                        {
+                            <span style="color:gray; font-size:18px;">(LOCKED)</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @if (!Model.Any())
+    {
+        <p style="text-align:center; font-size:24px; color:gray; margin-top:20px;">No decks found. Create one!</p>
+    }
+
+</div>

@@ -1,0 +1,78 @@
+﻿@model List<PTabuF2.Models.Card>
+@{
+    ViewData["Title"] = "Deck Details";
+}
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <style>
+        .retro-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: 'VT323', monospace;
+            font-size: 24px;
+            background-color: white;
+            border: 4px solid black;
+        }
+
+            .retro-table th, .retro-table td {
+                border: 2px solid black;
+                padding: 10px;
+                text-align: left;
+            }
+
+            .retro-table th {
+                background-color: #9C59FF;
+                color: white;
+            }
+
+        .action-btn {
+            background-color: #FF5E5E;
+            color: white;
+            padding: 5px 10px;
+            text-decoration: none;
+            border: 2px solid black;
+            font-family: 'VT323';
+        }
+    </style>
+</head>
+
+<div style="font-family:'VT323'; max-width:800px; margin:0 auto;">
+
+    <h1 style="font-size:60px;">DECK: @ViewBag.DeckName</h1>
+
+    <div style="margin-bottom:20px;">
+        <a href="/Decks/AddCard/@ViewBag.DeckID" class="retro-btn" style="background-color:#4CAF50; color:white; padding:10px 20px;">+ ADD NEW CARD</a>
+
+        <a href="/Decks/Index" class="retro-btn" style="background-color:#ccc; color:black; padding:10px 20px; margin-left:10px;">BACK TO LIST</a>
+    </div>
+
+    <table class="retro-table">
+        <thead>
+            <tr>
+                <th>TARGET WORD</th>
+                <th>FORBIDDEN WORDS</th>
+                <th>ACTION</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var card in Model)
+            {
+                <tr>
+                    <td style="font-weight:bold; color:#FF5E5E;">@card.TargetWord</td>
+                    <td>
+                        @card.ForbiddenWord1, @card.ForbiddenWord2, @card.ForbiddenWord3, @card.ForbiddenWord4, @card.ForbiddenWord5
+                    </td>
+                    <td>
+                        <a href="/Decks/DeleteCard/@card.CardID" class="action-btn" onclick="return confirm('Are you sure?');">DELETE</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @if (Model.Count == 0)
+    {
+        <p style="font-size:30px; color:gray; text-align:center; margin-top:20px;">THIS DECK IS EMPTY.</p>
+    }
+</div>

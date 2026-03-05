@@ -1,0 +1,96 @@
+﻿@model List<PTabuF2.Models.Card>
+
+@{
+    ViewData["Title"] = "Edit Deck";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+        .edit-container {
+            background-color: white;
+            width: 800px; /* Kartlar sığsın diye genişlettim */
+            padding: 40px;
+            border-radius: 40px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            max-height: 80vh; /* Çok kart olursa taşmasın */
+            overflow-y: auto; /* Kaydırma çubuğu */
+        }
+
+        /* Basit Tablo Tasarımı */
+        .card-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 20px;
+        }
+
+            .card-table th, .card-table td {
+                border: 2px solid black;
+                padding: 10px;
+                text-align: left;
+            }
+
+            .card-table th {
+                background-color: #FFD700; /* Sarı Başlık */
+            }
+
+        .btn-add {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            font-size: 24px;
+            text-decoration: none;
+            border: 3px solid black;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .delete-link {
+            color: red;
+            font-weight: bold;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="edit-container">
+        <h1 class="game-title" style="font-size: 40px; margin-bottom:10px;">EDIT: @ViewBag.DeckName</h1>
+
+        <a asp-controller="Decks" asp-action="AddCard" asp-route-id="@ViewBag.DeckID" class="btn-add">+ ADD NEW CARD</a>
+
+        <table class="card-table">
+            <thead>
+                <tr>
+                    <th>Target Word</th>
+                    <th>Forbidden Words</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var card in Model)
+                {
+                    <tr>
+                        <td style="font-weight:bold; color:#9C59FF;">@card.TargetWord</td>
+                        <td style="font-size:16px;">
+                            @card.ForbiddenWord1, @card.ForbiddenWord2, @card.ForbiddenWord3...
+                        </td>
+                        <td>
+                            <a href="#" class="delete-link">X</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <br />
+        <a asp-controller="Decks" asp-action="Index" style="color:black; font-size:20px;"> << Back to Decks</a>
+    </div>
+
+</body>
+</html>

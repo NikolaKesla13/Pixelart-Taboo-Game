@@ -1,0 +1,60 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div style="display:flex; justify-content:center; align-items:center; height:80vh;">
+
+    <div class="retro-container" style="width: 500px; padding: 50px;">
+
+        <h1 style="font-size: 100px; color: #FF5E5E; text-shadow: 6px 6px 0px black; margin-bottom: 40px; line-height: 0.8;">
+            P T A B U
+        </h1>
+
+        <div style="display: flex; flex-direction: column; gap: 20px; align-items: center;">
+
+            <a href="javascript:void(0);" onclick="playAndGo()" class="retro-btn" style="background-color:#4CAF50; color:white; width: 100%;">
+                START THE GAME
+            </a>
+
+            <a href="/Decks/Index" class="retro-btn" style="background-color:#FFD700; color:black; width: 100%;">
+                DECKS & CARDS
+            </a>
+
+            <a href="/Home/Settings" class="retro-btn" style="background-color:#ddd; color:black; width: 100%;">
+                SETTINGS
+            </a>
+
+            <button class="retro-btn" style="background-color:#FF5E5E; color:white; width: 100%;" onclick="alert('CHAOS MODE IS COMING SOON! 💀')">
+                CHAOS MODE
+            </button>
+
+        </div>
+    </div>
+</div>
+
+<audio id="audioStart" src="~/audio/start.mp3"></audio>
+
+<script>
+    // Sayfa açılınca eski oyun süresini temizle
+    localStorage.removeItem("gameTime");
+
+    function playAndGo() {
+        // 1. Sesi Çal
+        var audio = document.getElementById("audioStart");
+        if (audio) {
+            audio.play().catch(e => console.log(e));
+        }
+
+        // 2. Butonun şeklini değiştir
+        var btn = document.querySelector(".retro-btn"); // İlk butonu (Start) seçer
+        btn.innerText = "LOADING...";
+        btn.style.backgroundColor = "black";
+        btn.style.color = "white";
+        btn.style.cursor = "wait";
+
+        // 3. Bekle ve Git (Sesin uzunluğuna göre süreyi 3000 yapabilirsin)
+        setTimeout(function() {
+            window.location.href = "/Game/StartGame";
+        }, 2000);
+    }
+</script>
