@@ -2,6 +2,7 @@
 
 This project is a team-based, pixel art-themed Taboo (word-guessing) game developed using C# and ASP.NET Core MVC.
 
+
 ## 🚀 Features
 * **Team-Based Gameplay:** A turn-based scoring system designed for two teams.
 * **Customizable Deck:** A dynamic database structure allowing users to add custom target and forbidden words.
@@ -20,3 +21,6 @@ This project is a team-based, pixel art-themed Taboo (word-guessing) game develo
 * **Backend:** C#, ASP.NET Core MVC
 * **Database:** Microsoft SQL Server
 * **Frontend:** HTML5, CSS3, JavaScript
+
+#### Warning !
+* Some features may not be suitable for children.
